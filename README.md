@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/images/banner.png" alt="React Native Dev Guide – Git, Expo & EAS banner" width="980">
+</p>
+
 # 🚀 React Native Dev Guide – Git Workflow, Expo & EAS (Ultimate Version)
 
 > A clear, structured, and professional guide to help you (and your team) adopt the right workflow, master project organization, and ship confidently with React Native.
