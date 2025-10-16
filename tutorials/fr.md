@@ -140,6 +140,95 @@ git commit -m "test(e2e): add login flow test"
 
 ---
 
+## 🌿 Créer une nouvelle branche proprement (feature, fix, refactor…)
+
+Quand tu veux développer une **nouvelle feature**, corriger un **bug** ou faire un **refactor**,
+⚠️ **ne code jamais directement sur `main`**.
+
+Travaille toujours dans une branche dédiée pour éviter les conflits et garder un historique propre.
+
+---
+
+### 🧩 Étapes de base
+
+```bash
+# 1. Mets à jour la branche principale
+git checkout main
+git pull origin main
+
+# 2. Crée ta branche de travail à partir de main
+git checkout -b feature/ma-nouvelle-feature
+# (ou fix/bug-login, refactor/ui-cleanup, chore/update-readme...)
+
+# 3. Code tranquille et commit régulièrement
+git add .
+git commit -m "feat(ui): add dice roll animation"
+
+# 4. Envoie ta branche sur GitHub
+git push -u origin feature/ma-nouvelle-feature
+```
+
+---
+
+### ✅ Quand ta feature est terminée
+
+```bash
+# 1. Mets ton main à jour
+git checkout main
+git pull origin main
+
+# 2. Reviens sur ta feature
+git checkout feature/ma-nouvelle-feature
+
+# 3. Nettoie ton historique de commits
+git rebase -i main
+# -> garde le premier commit en pick
+# -> mets les autres en squash
+# -> choisis un message clair pour ton commit final
+
+# 4. Intègre les derniers changements récents de main
+git fetch origin
+git rebase origin/main   # pour rejouer ton commit propre sur la dernière version
+
+# 5. Merge proprement dans main
+git checkout main
+git merge feature/ma-nouvelle-feature
+git push
+```
+
+---
+
+### 🧹 Nettoyage
+
+```bash
+# Supprime la branche locale et distante
+git branch -d feature/ma-nouvelle-feature
+git push origin --delete feature/ma-nouvelle-feature
+```
+
+---
+
+### 💡 Bonnes pratiques Git (pour ne jamais “casser” main)
+
+* 🚫 Ne code **jamais directement sur `main`**.
+* 🌿 **1 tâche = 1 branche.** (feature, fix, refactor, chore…)
+* 🧠 Avant de créer une branche : `git pull origin main`.
+* 💾 Commit souvent, même pour du WIP (travail en cours).
+* 🔄 Rebase ou merge régulièrement sur `main` pour éviter les conflits.
+* 🧹 Supprime les branches terminées après merge.
+* 🧱 Garde `main` stable : code testé, relisible et prêt à déployer.
+
+---
+
+💬 **Exemples de conventions de nommage :**
+
+* `feature/dice-roll-animation`
+* `fix/auth-token-refresh`
+* `refactor/game-logic`
+* `chore/update-dependencies`
+
+---
+
 ## 🔧 Commandes Git utiles en plus
 
 ```
@@ -582,5 +671,5 @@ export default React.memo(MyComponent);
 ---
 
 # 🌍 Available Versions
-- 🇬🇧 [English](./en.md)
-- 🇫🇷 [French](./fr.md)
+* 🇬🇧 [English](./en.md)
+* 🇫🇷 [French](./fr.md)

@@ -139,6 +139,95 @@ git commit -m "test(e2e): add login flow test"
 
 ---
 
+## 🌿 Create a new branch properly (feature, fix, refactor...)
+
+When you want to develop a **new feature**, fix a **bug**, or make a **refactor**,
+⚠️ **never code directly on `main`**.
+
+Always work in a dedicated branch to avoid conflicts and keep a clean history.
+
+---
+
+### 🧩 Basic steps
+
+```bash
+# 1. Update the main branch
+git checkout main
+git pull origin main
+
+# 2. Create your working branch from main
+git checkout -b feature/my-new-feature
+# (or fix/bug-login, refactor/ui-cleanup, chore/update-readme...)
+
+# 3. Code calmly and commit regularly
+git add .
+git commit -m "feat(ui): add dice roll animation"
+
+# 4. Push your branch to GitHub
+git push -u origin feature/my-new-feature
+```
+
+---
+
+### ✅ When your feature is done
+
+```bash
+# 1. Update your main branch
+git checkout main
+git pull origin main
+
+# 2. Switch back to your feature branch
+git checkout feature/my-new-feature
+
+# 3. Clean up your commit history
+git rebase -i main
+# -> keep the first commit as 'pick'
+# -> mark all others as 'squash'
+# -> write a clear, meaningful final commit message
+
+# 4. Integrate the latest changes from main
+git fetch origin
+git rebase origin/main   # replay your cleaned-up commit on top of the latest main
+
+# 5. Merge cleanly into main
+git checkout main
+git merge feature/my-new-feature
+git push
+```
+
+---
+
+### 🧹 Cleanup
+
+```bash
+# Delete the local and remote branch
+git branch -d feature/my-new-feature
+git push origin --delete feature/my-new-feature
+```
+
+---
+
+### 💡 Git best practices (to never “break” main)
+
+* 🚫 Never code **directly on `main`**.
+* 🌿 **1 task = 1 branch.** (feature, fix, refactor, chore...)
+* 🧠 Before creating a branch: `git pull origin main`.
+* 💾 Commit often, even for WIP (work in progress).
+* 🔄 Rebase or merge regularly with `main` to avoid conflicts.
+* 🧹 Delete finished branches after merging.
+* 🧱 Keep `main` stable: tested, reviewed, and ready to deploy.
+
+---
+
+💬 **Branch naming examples:**
+
+* `feature/dice-roll-animation`
+* `fix/auth-token-refresh`
+* `refactor/game-logic`
+* `chore/update-dependencies`
+
+---
+
 ## 🔧 Other Useful Git Commands
 
 ```
